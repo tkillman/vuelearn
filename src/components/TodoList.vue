@@ -1,10 +1,12 @@
 <template>
   <div>
       <ul>
-          <li v-for="(todoItem) in todoItems" v-bind:key="todoItem.item">
-              {{todoItem}}
-          </li>
+        <li v-for="(todoItem, index) in todoItems" class="shadow" v-bind:key="todoItem.item">
+<i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}" v-on:click="toggleComplete(todoItem, index)"></i>
+        <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
+      </li>
       </ul>
+      
   </div>
 </template>
 
@@ -18,8 +20,8 @@ export default {
     created: function(){
         for (var i = 0; i <localStorage.length; i++) {
             if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-                console.log(localStorage.key(i));
-                this.todoItems.push(localStorage.key(i));
+                var obj = localStorage.getItem(localStorage.key(i));
+                this.todoItems.push(JSON.parse(obj));
             }
         }
     }

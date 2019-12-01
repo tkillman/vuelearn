@@ -16,7 +16,10 @@ export default {
     },
     methods: {
         addTodo: function(){
-            localStorage.setItem(this.newTodoItem,this.newTodoItem);
+            var obj = {};
+            obj.completed = false;
+            obj.item = this.newTodoItem;
+            localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
         }
     }
 }
