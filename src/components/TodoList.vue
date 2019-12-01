@@ -1,16 +1,28 @@
 <template>
   <div>
       <ul>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
+          <li v-for="(todoItem) in todoItems" v-bind:key="todoItem.item">
+              {{todoItem}}
+          </li>
       </ul>
   </div>
 </template>
 
 <script>
 export default {
-
+    data: function () {
+        return {
+            todoItems:[]
+        }
+    },
+    created: function(){
+        for (var i = 0; i <localStorage.length; i++) {
+            if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
+                console.log(localStorage.key(i));
+                this.todoItems.push(localStorage.key(i));
+            }
+        }
+    }
 }
 </script>
 
