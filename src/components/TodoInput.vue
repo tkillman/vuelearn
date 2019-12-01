@@ -1,6 +1,6 @@
 <template>
   <div class="inputBox shadow">
-      <input type="text"/>
+      <input type="text" v-model='newTodoItem'/>
           <span class="addContainer" v-on:click="addTodo">
       <i class="addBtn fas fa-plus" aria-hidden="true"></i>
     </span>
@@ -9,7 +9,16 @@
 
 <script>
 export default {
-
+    data: function() {
+        return {
+            newTodoItem:''
+        }
+    },
+    methods: {
+        addTodo: function(){
+            localStorage.setItem(this.newTodoItem,this.newTodoItem);
+        }
+    }
 }
 </script>
 
